@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  @apply font-sans text-gray-900 bg-gray-50;
+}
+
+a {
+  @apply text-blue-600 hover:text-blue-700 transition-colors;
+}
+
+button {
+  @apply px-4 py-2 rounded-lg font-medium transition-colors;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
