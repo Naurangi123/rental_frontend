@@ -10,6 +10,7 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [reviews, setReviews] = useState([]);
 
   // Initialize auth on app load
   useEffect(() => {
@@ -97,6 +98,14 @@ export const AuthProvider = ({ children }) => {
   };
 
 
+  const getReviews = async () => {
+    const results = await userAPI.getReviews();
+    const reviewsData = results.data;
+    setReviews(reviewsData);
+    return reviewsData;
+  };
+
+
   /**
    * Upload user avatar
    */
@@ -117,6 +126,7 @@ export const AuthProvider = ({ children }) => {
       verifyEmail,
       getProfile,
       updateProfile,
+      getReviews,
       uploadAvatar,
       isAuthenticated: !!user,
       role: user?.role,

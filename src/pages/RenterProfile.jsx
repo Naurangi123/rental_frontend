@@ -79,10 +79,17 @@ export default function RenterProfile() {
                 <span>Member since {renter.joinDate}</span>
               </div>
             </div>
-            <button className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-              <MessageCircle size={20} />
-              <span>Message</span>
-            </button>
+            <Link
+              // key={renter.id}
+              // to={`${renter.id}/message/`}
+              to="/message/"
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            >
+              <button className="flex items-center space-x-2 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                <MessageCircle size={20} />
+                <span>Message</span>
+              </button>
+            </Link>
           </div>
         </div>
 

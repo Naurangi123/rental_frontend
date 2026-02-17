@@ -8,10 +8,12 @@ import HumanReviewDashboard from './HumanReview';
 
 export default function Profile() {
   const [user, setUser] = useState(null);
-  const { getProfile } = useAuth();
+  const { getProfile, getReviews } = useAuth();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
+
+  const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -20,8 +22,10 @@ export default function Profile() {
       try {
         setError(null);
         const profile = await getProfile();
+        const reviews = await getReviews();
         if (isMounted) {
           setUser(profile);
+          setReviews(reviews);
         }
       } catch (err) {
         console.error('Failed to load profile', err);
@@ -42,7 +46,6 @@ export default function Profile() {
     };
   }, []);
 
-  console.log('User Profile:', user);
 
   const verificationChecks = [
     { label: 'Email Verified', status: user?.email_verified || false },
@@ -50,6 +53,8 @@ export default function Profile() {
     { label: 'ID Verified', status: user?.id_verified || false },
     { label: 'Payment Method', status: user?.payment_verified || false },
   ];
+
+  // const service_tags = ["chat", "dinner", "movie companion", "walk", "shopping", "concert", "coffee"];
 
   // Loading state
   if (loading) {
@@ -115,7 +120,7 @@ export default function Profile() {
               />
               <div className="flex-1">
                 <div className="flex items-center space-x-2 mb-2 flex-wrap">
-                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{user.name || 'User'}</h1>
+                  <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{user.public_name || 'User'}</h1>
                   {user.is_verified && (
                     <CheckCircle size={28} className="text-green-500" />
                   )}
@@ -123,13 +128,35 @@ export default function Profile() {
                 <p className="text-gray-600 mb-4">
                   Member since {user.created_at ? new Date(user.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long' }) : 'N/A'}
                 </p>
+                <p className="text-gray-600 mb-4">
+                  Age {user.dob} /
+                {(() => {
+                  const dob = new Date(user.dob);
+                  if (isNaN(dob)) return '';
+                  const now = new Date();
+                  let years = now.getFullYear() - dob.getFullYear();
+                  let months = now.getMonth() - dob.getMonth();
+                  const dayDiff = now.getDate() - dob.getDate();
+                  if (dayDiff < 0) months -= 1;
+                  if (months < 0) {
+                    years -= 1;
+                    months += 12;
+                  }
+                  return ` (${years} years ${months} months)`;
+                })()}
+                <p className="text-gray-600 mb-4">
+                    Last Active {(user.last_active || user.last_login)
+                    ? new Date(user.last_active || user.last_login).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })
+                    : 'N/A'}
+                  </p>
+                </p>
                 <div className="grid grid-cols-3 gap-4 sm:gap-6">
                   <div>
                     <div className="text-xl sm:text-2xl font-bold text-pink-600">{user.rating || 0}</div>
                     <div className="flex text-yellow-400 text-sm">★★★★★</div>
                   </div>
                   <div>
-                    <div className="text-xl sm:text-2xl font-bold text-pink-600">{user.reviews_count || 0}</div>
+                    <div className="text-xl sm:text-2xl font-bold text-pink-600">{reviews.count || 0}</div>
                     <div className="text-gray-600 text-sm">Reviews</div>
                   </div>
                   <div>
@@ -151,15 +178,14 @@ export default function Profile() {
         {/* Tabs */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
           <div className="flex border-b border-gray-200 overflow-x-auto">
-            {['overview', 'verification', 'rentals', 'reviews'].map((tab) => (
+            {['overview', 'verification', 'velors', 'reviews', "services"].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`px-4 sm:px-6 py-4 font-semibold transition-all duration-300 whitespace-nowrap ${
-                  activeTab === tab
-                    ? 'border-b-4 border-pink-500 text-pink-600 bg-pink-50'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
-                }`}
+                className={`px-4 sm:px-6 py-4 font-semibold transition-all duration-300 whitespace-nowrap ${activeTab === tab
+                  ? 'border-b-4 border-pink-500 text-pink-600 bg-pink-50'
+                  : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  }`}
               >
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </button>
@@ -176,11 +202,34 @@ export default function Profile() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div className="bg-pink-50 p-4 rounded-lg">
                     <h3 className="font-semibold text-gray-700 mb-2">Email</h3>
-                    <p className="text-gray-600 break-all">{user.email}</p>
+                  {(() => {
+                    const email = user.email || '';
+                    if (!email) return null;
+                    const [local, domain] = email.split('@');
+                    if (!domain) return <p className="text-sm text-gray-500 mt-2">Masked: {email}</p>;
+                    let localMasked;
+                    if (local.length <= 2) {
+                      localMasked = local[0] + '*'.repeat(Math.max(0, local.length - 1));
+                    } else {
+                      localMasked = local[0] + '*'.repeat(Math.max(0, local.length - 2)) + local.slice(-1);
+                    }
+                    return <p className="text-sm text-gray-500 mt-2">{localMasked}@{domain}</p>;
+                  })()}
                   </div>
                   <div className="bg-pink-50 p-4 rounded-lg">
                     <h3 className="font-semibold text-gray-700 mb-2">Phone</h3>
-                    <p className="text-gray-600">{user.phone || 'Not provided'}</p>
+                  {(() => {
+                    const phone = user.phone || '';
+                    if (!phone) return null;
+                    const digits = phone.replace(/\D/g, '');
+                    const visibleCount = Math.min(4, digits.length);
+                    let seen = 0;
+                    const masked = phone.replace(/\d/g, (ch) => {
+                      seen += 1;
+                      return seen <= digits.length - visibleCount ? '*' : ch;
+                    });
+                    return <p className="text-sm text-gray-500 mt-2">{masked}</p>;
+                  })()}
                   </div>
                 </div>
               </div>
@@ -210,32 +259,76 @@ export default function Profile() {
               </div>
             )}
 
-            {activeTab === 'rentals' && (
+            {activeTab === 'velors' && (
               <div>
-                <h2 className="text-2xl font-bold mb-6 text-gray-900">My Rentals</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-900">My Velors</h2>
                 <p className="text-gray-600 text-lg">
-                  You have <span className="font-bold text-pink-600">{user.rentals_count || 0}</span> active rentals.
+                  You have <span className="font-bold text-pink-600">{user.rentals_count || 0}</span> active velors.
                 </p>
               </div>
             )}
 
             {activeTab === 'reviews' && (
-              <div>
-                <h2 className="text-2xl font-bold mb-6 text-gray-900">My Reviews</h2>
-                <p className="text-gray-600 text-lg">
-                  You have <span className="font-bold text-pink-600">{user.reviews_count || 0}</span> reviews from renters.
-                </p>
-              </div>
+              <>
+                <div>
+                  <h2 className="text-2xl font-bold mb-6 text-gray-900">My Reviews</h2>
+                  <p className="text-gray-600 text-lg">
+                    You have <span className="font-bold text-pink-600">{reviews.count || 0}</span> reviews from renters.
+                  </p>
+                </div>
+                <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
+                  <ReviewList reviews={reviews.results} />
+                </div>
+              </>
+            )}
+            {activeTab === 'services' && (
+              <>
+                <div>
+                  <h2 className="text-2xl font-bold mb-6 text-gray-900">My Services</h2>
+                   <div className="space-y-3">
+                    <span className="font-semibold">Services:</span>{" "}
+                    {user.service_tags?.join(", ") || "No services added yet."}
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
-            <EvidenceViewer />
+          <EvidenceViewer />
         </div>
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-8">
-            <DecisionPane />
+          <DecisionPane />
         </div>
       </div>
     </div>
   );
 }
+
+const ReviewList = ({ reviews }) => {
+  if (!reviews || reviews.length === 0) {
+    return <p className="text-gray-500 text-center py-8">No reviews yet.</p>;
+  }
+
+  return (
+    <div className="space-y-4">
+      {reviews.map((review) => (
+        <div key={review.id} className="border-b border-gray-200 last:border-0 p-4 hover:bg-gray-50 transition-colors">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center space-x-2">
+              <span className="font-semibold text-gray-900">{review.reviewer_name || 'Anonymous'}</span>
+              <div className="flex text-yellow-400 text-sm">
+                {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+              </div>
+            </div>
+            <span className="text-sm text-gray-500">
+              {new Date(review.created_at).toLocaleDateString()}
+            </span>
+          </div>
+          <p className="text-gray-700">{review.comment}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+

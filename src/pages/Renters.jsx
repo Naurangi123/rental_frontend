@@ -3,7 +3,7 @@ import { Star, MapPin, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function Renters() {
-  const [renters] = useState([
+  const [friends] = useState([
     {
       id: 1,
       name: 'Sarah Johnson',
@@ -45,7 +45,7 @@ export default function Renters() {
       rating: 4.6,
       reviews: 19,
       verified: true,
-      bio: 'Professional, reliable renter',
+      bio: 'Professional, reliable user',
       joinDate: 'Aug 2022'
     },
     {
@@ -76,15 +76,15 @@ export default function Renters() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-12">
-          <h1 className="text-4xl font-bold mb-4">Meet Our Renters</h1>
+          <h1 className="text-4xl font-bold mb-4">Meet Your Friends</h1>
           <p className="text-gray-600 text-lg">
-            Connect with verified and trusted renters in our community.
+            Connect with verified and trusted user in our community.
           </p>
         </div>
 
-        {/* Renters Grid */}
+        {/* friends Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {renters.map((renter) => (
+          {friends.map((renter) => (
             <Link
               key={renter.id}
               to={`/renter/${renter.id}`}

@@ -1,11 +1,14 @@
 import axios from 'axios';
-
+import Cookies from "js-cookie";
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true, // for HttpOnly refresh cookie
+  headers: {
+    "X-CSRFToken": Cookies.get("csrftoken"),
+  },
 });
 
 /* =========================
@@ -150,6 +153,9 @@ export const userAPI = {
 
   updateProfile: (data) =>
     apiClient.patch(`/users/me/`, data),
+
+  getReviews: () =>
+    apiClient.get('/reviews/'),
 
   uploadAvatar: (formData) =>
     apiClient.patch(`/users/update_profile_picture/`, formData, {

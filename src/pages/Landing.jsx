@@ -2,6 +2,8 @@ import { Link } from 'react-router-dom';
 import { Search, Home, Shield, Users, TrendingUp, MapPin, CheckCircle, AlertTriangle, Heart } from 'lucide-react';
 import HumanReviewDashboard from './HumanReview';
 
+import velora from '../assets/velora.png';
+
 export default function Landing() {
   return (
     <div className="min-h-screen">
@@ -10,16 +12,16 @@ export default function Landing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="text-center lg:text-left">
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6">Find Your Perfect Rental Home</h1>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 lg:mb-6">Find Your Perfect Match</h1>
               <p className="text-lg sm:text-xl mb-6 lg:mb-8 text-pink-100">
-                Connect with trusted renters and homeowners. Browse, compare, and rent with confidence in a safe, respectful community.
+                Connect with trusted friends. Browse, compare, and talk with confidence in a safe, respectful community.
               </p>
               <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
                 <Link
                   to="/rentals"
                   className="px-6 sm:px-8 py-3 bg-white text-pink-600 rounded-lg font-bold hover:bg-gray-100 transition-colors text-center"
                 >
-                  Browse Rentals
+                  Find Friends
                 </Link>
                 <Link
                   to="/register"
@@ -29,8 +31,8 @@ export default function Landing() {
                 </Link>
               </div>
             </div>
-            <div className="bg-pink-400 rounded-lg h-64 sm:h-80 lg:h-96 flex items-center justify-center mt-8 lg:mt-0">
-              <Home size={100} className="text-pink-100 sm:w-32 sm:h-32 lg:w-40 lg:h-40" />
+            <div className="flex items-center justify-center mt-8 h-64 sm:h-80 lg:h-96 lg:mt-0">
+              <img src={velora} alt="Velora Logo" className="w-full h-full object-contain" />
             </div>
           </div>
         </div>
@@ -43,7 +45,7 @@ export default function Landing() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div>
               <p className="text-lg sm:text-xl text-gray-700 mb-6">
-                RentKano is a premium rental platform connecting verified renters and providers worldwide. We facilitate safe, consensual rental arrangements with a focus on trust, respect, and community. Whether you're seeking a temporary home or offering one, our platform ensures secure connections tailored to your needs.
+                Velora is a premium rental platform connecting verified user worldwide. We facilitate safe, consensual arrangements with a focus on trust, respect, and community. Whether you're seeking a temporary friends or offering one, our platform ensures secure connections tailored to your needs.
               </p>
               <p className="text-base sm:text-lg text-gray-600">
                 Designed for Indian and international users, we embrace cultural diversity, promote safety, and uphold ethical standards. Join a growing network of respectful individuals committed to positive experiences.
@@ -53,7 +55,7 @@ export default function Landing() {
               <Heart size={48} className="text-pink-500 mb-4" />
               <h3 className="text-xl sm:text-2xl font-semibold text-pink-700 mb-4">Our Mission</h3>
               <p className="text-gray-600">
-                To create a safe, inclusive space where people can connect authentically, respecting boundaries and fostering meaningful relationships in the rental space.
+                To create a safe, inclusive space where people can connect authentically, respecting boundaries and fostering meaningful relationships in the borrowed space.
               </p>
             </div>
           </div>
@@ -196,7 +198,7 @@ export default function Landing() {
               <div>
                 <h3 className="text-lg sm:text-xl font-semibold text-red-600 mb-2">Stay Safe & Legal</h3>
                 <p className="text-gray-700 text-sm sm:text-base mb-4">
-                  RentKano is committed to safety and legality. Any activities that violate laws, including but not limited to human trafficking, exploitation, or non-consensual arrangements, are strictly prohibited and will be reported to authorities.
+                  Velora is committed to safety and legality. Any activities that violate laws, including but not limited to human trafficking, exploitation, or non-consensual arrangements, are strictly prohibited and will be reported to authorities.
                 </p>
                 <ul className="space-y-2 text-gray-600 text-sm sm:text-base">
                   <li>• Do not engage in illegal activities; this includes any form of coercion or fraud.</li>
@@ -218,7 +220,7 @@ export default function Landing() {
       {/* Features Section */}
       <section className="py-12 sm:py-16 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-8 lg:mb-16">Why Choose RentKano?</h2>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center mb-8 lg:mb-16">Why Choose Velora?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             <div className="text-center">
               <div className="bg-pink-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -268,6 +270,6 @@ export default function Landing() {
         </div>
       </section>
     </div>
-    
+
   );
 }

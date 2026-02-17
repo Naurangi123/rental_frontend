@@ -14,14 +14,16 @@ export default function Navigation() {
   // Public links visible to everyone
   const publicLinks = [
     { path: '/', label: 'Home', icon: Home },
-    { path: '/rentals', label: 'Browse Rentals', icon: Search },
-    { path: '/renters', label: 'Renters', icon: Users },
+    { path: '/rentals', label: 'Browse Velors', icon: Search },
+    { path: '/renters', label: 'Velors', icon: Users },
     { path: '/contact', label: 'Contact', icon: Phone },
   ];
 
   // Private links visible only when logged in (simplified)
   const privateLinks = [
     { path: '/profile', label: 'My Profile', icon: User },
+    // { path: '/rentals', label: 'Browse Rentals', icon: Search },
+    // { path: '/renters', label: 'Renters', icon: Users },
   ];
 
   // Combine links based on auth status
@@ -33,10 +35,10 @@ export default function Navigation() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-            <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold shadow-lg">
-              R
+            <div className="w-10 h-10 bg-gradient-to-r from-pink-900 to-pink-600 rounded-2xl flex items-center justify-center text-white font-bold shadow-lg">
+              V
             </div>
-            <span className="text-2xl font-bold text-pink-700 tracking-wide">RentKaro</span>
+            <span className="text-2xl font-bold text-pink-700 tracking-wide">Velora</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -45,11 +47,10 @@ export default function Navigation() {
               <Link
                 key={path}
                 to={path}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
-                  isActive(path)
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${isActive(path)
                     ? 'text-white bg-pink-500 shadow-md'
                     : 'text-gray-700 hover:text-pink-600 hover:bg-pink-50'
-                }`}
+                  }`}
               >
                 <Icon size={18} />
                 <span>{label}</span>
@@ -110,11 +111,10 @@ export default function Navigation() {
               <Link
                 key={path}
                 to={path}
-                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${
-                  isActive(path)
+                className={`flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-300 ${isActive(path)
                     ? 'text-white bg-pink-500 shadow-md'
                     : 'text-gray-700 hover:text-pink-600 hover:bg-pink-50'
-                }`}
+                  }`}
                 onClick={() => setIsOpen(false)}
               >
                 <Icon size={20} />
