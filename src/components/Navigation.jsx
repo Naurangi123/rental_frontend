@@ -30,7 +30,7 @@ export default function Navigation() {
   const navLinks = user ? [...publicLinks, ...privateLinks] : publicLinks;
 
   return (
-    <nav className="bg-white shadow-xl sticky top-0 z-50 border-b-2 border-pink-200">
+    <nav className="bg-white shadow-xl sticky top-0 z-50 border-b-2 border-pink-200" style={{ background: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}

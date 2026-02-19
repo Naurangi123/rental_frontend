@@ -18,6 +18,7 @@ import Register from './pages/Register';
 import VerifyEmail from './pages/VerifyEmail';
 import HumanReviewDashboard from './pages/HumanReview';
 import Message from './pages/Message';
+import BookingPage from './pages/Payment'
 
 function App() {
   return (
@@ -39,7 +40,8 @@ function App() {
               <Route path="/rental-history" element={<RentalHistory />} />
               <Route path="/who-rented-me" element={<WhoRentedMe />} />
               <Route path="/contact" element={<HumanReviewDashboard />} />
-              <Route path="/message" element={<Message/>}/>
+              <Route path="/messages" element={<Message/>}/>
+              <Route path="/payment/:id" element={<BookingPage/>}/>
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/verify-email" element={<VerifyEmail />} />
