@@ -26,7 +26,7 @@ const mockUsers = [
     public_name: "Arjun K.",
     name: "Arjun Kapoor",
     gender: "male",
-    role: "provider",
+    role: "companion",
     location: "Delhi",
     hourly_rate: 1500,
     service_tags: ["Long Walks", "Dinner", "Concerts", "Gym Buddy"],
@@ -44,7 +44,7 @@ const mockUsers = [
     public_name: "Pooja V.",
     name: "Pooja Verma",
     gender: "female",
-    role: "provider",
+    role: "companion",
     location: "Bangalore",
     hourly_rate: 1000,
     service_tags: ["Café Hopping", "Art Galleries", "Movie Companion", "Book Clubs"],
@@ -80,7 +80,7 @@ const mockUsers = [
     public_name: "Anjali K.",
     name: "Anjali Kapoor",
     gender: "female",
-    role: "renter",
+    role: "Patron",
     location: "Kolkata",
     hourly_rate: 1100,
     service_tags: ["Adda Sessions", "Shopping", "Cultural Events", "Food Tours"],
@@ -98,7 +98,7 @@ const mockUsers = [
     public_name: "Vikram R.",
     name: "Vikram Rao",
     gender: "male",
-    role: "provider",
+    role: "companion",
     location: "Pune",
     hourly_rate: 1400,
     service_tags: ["Trekking", "Movies", "Dinner", "Bike Rides"],
@@ -134,7 +134,7 @@ const mockUsers = [
     public_name: "Dev P.",
     name: "Dev Pillai",
     gender: "male",
-    role: "provider",
+    role: "companion",
     location: "Kochi",
     hourly_rate: 1050,
     service_tags: ["Backwater Trips", "Seafood Dinners", "Beach Bonfires", "Chess"],
@@ -152,7 +152,7 @@ const mockUsers = [
     public_name: "Meera J.",
     name: "Meera Joshi",
     gender: "female",
-    role: "provider",
+    role: "companion",
     location: "Jaipur",
     hourly_rate: 900,
     service_tags: ["Heritage Walks", "Rajasthani Cuisine", "Shopping", "Photography"],
@@ -177,7 +177,7 @@ function getAge(dob) {
 }
 
 function getRoleLabel(role) {
-  return { renter: "Renter", provider: "Provider", both: "Open to Both" }[role] || role;
+  return { renter: "Patron", provider: "Companion", both: "Open to Both" }[role] || role;
 }
 
 export default function Rentals() {
@@ -356,8 +356,8 @@ export default function Rentals() {
                   set: setFilterRole,
                   options: [
                     { value: "any", label: "Any Role" },
-                    { value: "provider", label: "Provider only" },
-                    { value: "renter", label: "Renter only" },
+                    { value: "companion", label: "Provider only" },
+                    { value: "patron", label: "Renter only" },
                   ],
                 },
                 {
@@ -603,7 +603,7 @@ export default function Rentals() {
                       </div>
                     </div>
                     <button
-                      // onClick={(e) => e.preventDefault()}
+                      onClick={(e) => e.preventDefault()}
                       className="px-4 py-2.5 rounded-xl text-sm font-bold text-white transition-all hover:opacity-90 active:scale-95"
                       style={{
                         background: gradientBg,

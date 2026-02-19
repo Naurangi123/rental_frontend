@@ -49,7 +49,7 @@ export default function Navigation() {
                 to={path}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${isActive(path)
                     ? 'text-white bg-pink-500 shadow-md'
-                    : 'text-gray-700 hover:text-pink-600 hover:bg-pink-50'
+                    : 'text-gray-900 hover:text-pink-600 hover:bg-pink-50'
                   }`}
               >
                 <Icon size={18} />
@@ -106,7 +106,7 @@ export default function Navigation() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="lg:hidden pb-6 space-y-3 bg-white border-t border-pink-200 rounded-b-lg shadow-inner">
+          <div className="lg:hidden pb-6 space-y-3 bg-white border-t border-pink-200 rounded-b-lg shadow-inner" style={{ background: "linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)" }}>
             {navLinks.map(({ path, label, icon: Icon }) => (
               <Link
                 key={path}

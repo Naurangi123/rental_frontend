@@ -43,6 +43,124 @@ const rentalsData = [
     id_verified: false,
     photos: ["https://i.pravatar.cc/600?img=11"],
   },
+    {
+    id: 3,
+    public_name: "Pooja V.",
+    name: "Pooja Verma",
+    gender: "female",
+    role: "provider",
+    location: "Bangalore, Karnataka",
+    hourly_rate: 1000,
+    service_tags: ["Café Hopping", "Art Galleries", "Movie Companion", "Book Clubs", "Museum Visits"],
+    dob: "2002-01-05",
+    rating: 4.9,
+    reviews: 21,
+    is_verified: true,
+    id_verified: true,
+    photos: ["https://i.pravatar.cc/600?img=43"],
+  },
+  {
+    id: 4,
+    public_name: "Rahul M.",
+    name: "Rahul Mehta",
+    gender: "male",
+    role: "both",
+    location: "Chennai",
+    hourly_rate: 1300,
+    service_tags: ["Beach Walks", "Dinner", "Live Music", "Road Trips"],
+    dob: "1996-11-17",
+    rating: 4.7,
+    reviews: 12,
+    is_verified: false,
+    id_verified: false,
+    photos: ["https://i.pravatar.cc/600?img=49"],
+  },
+  {
+    id: 5,
+    public_name: "Anjali K.",
+    name: "Anjali Kapoor",
+    gender: "female",
+    role: "Patron",
+    location: "Kolkata",
+    hourly_rate: 1100,
+    service_tags: ["Adda Sessions", "Shopping", "Cultural Events", "Food Tours"],
+    dob: "1999-06-30",
+    rating: 5.0,
+    reviews: 10,
+    is_verified: true,
+    id_verified: true,
+    photos: ["https://i.pravatar.cc/600?img=54"],
+  },
+  {
+    id: 6,
+    public_name: "Vikram R.",
+    name: "Vikram Rao",
+    gender: "male",
+    role: "companion",
+    location: "Pune",
+    hourly_rate: 1400,
+    service_tags: ["Trekking", "Movies", "Dinner", "Bike Rides"],
+    dob: "1997-03-08",
+    rating: 4.5,
+    reviews: 14,
+    is_verified: true,
+    id_verified: false,
+    photos: [
+      "https://i.pravatar.cc/600?img=56"
+    ],
+  },
+  {
+    id: 7,
+    public_name: "Sneha T.",
+    name: "Sneha Tripathi",
+    gender: "female",
+    role: "both",
+    location: "Hyderabad",
+    hourly_rate: 950,
+    service_tags: ["Cooking Together", "Rooftop Dinners", "Yoga Sessions", "Chat"],
+    dob: "2001-09-14",
+    rating: 4.8,
+    reviews: 8,
+    is_verified: true,
+    id_verified: true,
+    photos: [
+      "https://i.pravatar.cc/600?img=59"
+    ],
+  },
+  {
+    id: 8,
+    public_name: "Dev P.",
+    name: "Dev Pillai",
+    gender: "male",
+    role: "companion",
+    location: "Kochi",
+    hourly_rate: 1050,
+    service_tags: ["Backwater Trips", "Seafood Dinners", "Beach Bonfires", "Chess"],
+    dob: "1995-12-25",
+    rating: 4.9,
+    reviews: 20,
+    is_verified: true,
+    id_verified: true,
+    photos: [
+      "https://i.pravatar.cc/600?img=64"
+    ],
+  },
+  {
+    id: 9,
+    public_name: "Meera J.",
+    name: "Meera Joshi",
+    gender: "female",
+    role: "companion",
+    location: "Jaipur",
+    hourly_rate: 900,
+    service_tags: ["Heritage Walks", "Rajasthani Cuisine", "Shopping", "Photography"],
+    dob: "2000-07-22",
+    rating: 4.7,
+    reviews: 16,
+    is_verified: false,
+    id_verified: true,
+    photos: ["https://i.pravatar.cc/600?img=66"],
+  }
 ];
 
 function getAge(dob) {
@@ -222,9 +340,6 @@ function Checkbox({ checked, onChange, label, sublabel, required, accent = "#f43
   );
 }
 
-/* ─────────────────────────────────────
-   MAIN COMPONENT
-───────────────────────────────────── */
 export default function BookingPage() {
   const { id } = useParams();
   const rental  = rentalsData.find((r) => r.id === parseInt(id));

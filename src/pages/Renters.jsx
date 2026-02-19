@@ -25,7 +25,7 @@ const mockFriends = [
     public_name: "Arjun K.",
     name: "Arjun Kapoor",
     gender: "male",
-    role: "provider",
+    role: "companion",
     location: "Delhi",
     dob: "1998-08-21",
     rating: 4.7,
@@ -42,7 +42,7 @@ const mockFriends = [
     public_name: "Pooja V.",
     name: "Pooja Verma",
     gender: "female",
-    role: "provider",
+    role: "companion",
     location: "Bangalore",
     dob: "2002-01-05",
     rating: 4.8,
@@ -76,7 +76,7 @@ const mockFriends = [
     public_name: "Anjali K.",
     name: "Anjali Kapoor",
     gender: "female",
-    role: "renter",
+    role: "patron",
     location: "Kolkata",
     dob: "1999-06-30",
     rating: 5.0,
@@ -93,7 +93,7 @@ const mockFriends = [
     public_name: "Vikram R.",
     name: "Vikram Rao",
     gender: "male",
-    role: "provider",
+    role: "companion",
     location: "Pune",
     dob: "1997-03-08",
     rating: 4.5,
@@ -127,7 +127,7 @@ const mockFriends = [
     public_name: "Dev P.",
     name: "Dev Pillai",
     gender: "male",
-    role: "provider",
+    role: "companion",
     location: "Kochi",
     dob: "1995-12-25",
     rating: 4.9,
@@ -144,7 +144,7 @@ const mockFriends = [
     public_name: "Meera J.",
     name: "Meera Joshi",
     gender: "female",
-    role: "provider",
+    role: "companion",
     location: "Jaipur",
     dob: "2000-07-22",
     rating: 4.7,
@@ -168,7 +168,7 @@ function getAge(dob) {
 }
 
 function getRoleLabel(role) {
-  return { renter: "Renter", provider: "Provider", both: "Open to Both" }[role] || role;
+  return { renter: "Patron", provider: "Companion", both: "Open to Both" }[role] || role;
 }
 
 export default function Renters() {
